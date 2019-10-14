@@ -1,0 +1,134 @@
+.FormPage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  overflow: hidden;
+  .hide {
+      opacity: 0;
+      pointer-events: none;
+  }
+  .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .titlePositioner {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .text {
+      font-size: 2rem;
+      font-weight: 600;
+      color: white;
+    }
+  }
+  .formPositioner {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    height: 50%;
+    padding: 0 7%;
+    .line {
+      height: 15.1%;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      background-color: white;
+      margin-bottom: 1.5%;
+      & > div {
+        top: 0;
+      }
+      .left {
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0% 3%;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translate(0, -50%);
+          width: 2px;
+          background-color: black;
+          height: 50%;
+        }
+        .titleContainer {
+          width: 100%;
+          // 文字分散對齊
+          text-align: justify;
+          text-justify: distribute-all-lines;
+          text-align-last: justify;
+          font-weight: 600;
+        }
+      }
+      .right {
+        width: 75%;
+        height: 100%;
+        padding: 0 5%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        input {
+          width: 100%;
+          outline: 0;
+          border-style: none;
+          -webkit-box-shadow: none !important;
+          -moz-box-shadow: none !important;
+          box-shadow: none !important;
+          &:focus {
+            outline: 0;
+            border-style: none;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+  }
+  .submitSuccessful {
+      position: absolute;
+      width: 100%;
+      height: 15%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+          height: 100%;
+      }
+  }
+  .submitButtonPositioner {
+    position: absolute;
+    top: 85%;
+    width: 100%;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 100%;
+    }
+  }
+}
