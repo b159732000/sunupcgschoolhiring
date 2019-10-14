@@ -65,6 +65,13 @@ function App(props) {
     }
   }, [storeUsrOpenID])
 
+  // 如果此人在資料庫中，則跳轉到FormPage，並由FormPage的邏輯直接顯示結束畫面
+  useEffect(()=>{
+    if(storeThisPersonIdIsInDataBase) {
+      props.history.push('/sunupcgschoolhiring/FormPage');
+    }
+  }, [storeThisPersonIdIsInDataBase])
+
   useEffect(() => {
     // 取得微信openID放到store
     if (window.enableWeXinLogIn) {
@@ -219,7 +226,7 @@ function App(props) {
           desc: "了解深圳骄阳创意科技2019最新职缺，即时投递履历。", // 分享描述
           link: 'http://hvr.isunupcg.com/sunupcgschoolhiring/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           // imgUrl: res.msg.imgUrl, // 分享图标
-          imgUrl: 'https://p2static.oss-cn-beijing.aliyuncs.com/PlanetIcon.jpg', // 分享图标
+          imgUrl: 'https://sunupcgschoolhiring.oss-cn-shenzhen.aliyuncs.com/TitleImg.png', // 分享图标
           success: function (res) {
             console.log(res);
             // 用户确认分享后执行的回调函数
@@ -237,7 +244,7 @@ function App(props) {
           desc: "了解深圳骄阳创意科技2019最新职缺，即时投递履历。", // 分享描述
           link: 'http://hvr.isunupcg.com/sunupcgschoolhiring/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           // imgUrl: res.msg.imgUrl, // 分享图标
-          imgUrl: 'https://p2static.oss-cn-beijing.aliyuncs.com/PlanetIcon.jpg', // 分享图标
+          imgUrl: 'https://sunupcgschoolhiring.oss-cn-shenzhen.aliyuncs.com/TitleImg.png', // 分享图标
           type: "", // 分享类型,music、video或link，不填默认为link
           dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
           success: function () {

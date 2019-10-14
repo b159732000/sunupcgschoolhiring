@@ -14,7 +14,7 @@ const LoadingPage = () => {
         if (window.loadingPageIsOn) {
             setTimeout(() => {
                 setLoadingBarFinished(true);
-            }, 1500)
+            }, 2000)
         } else {
             setLoadingBarFinished(true);
         }

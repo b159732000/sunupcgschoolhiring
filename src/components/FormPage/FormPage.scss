@@ -94,12 +94,14 @@
           -webkit-box-shadow: none !important;
           -moz-box-shadow: none !important;
           box-shadow: none !important;
+          -webkit-user-select: text;
           &:focus {
             outline: 0;
             border-style: none;
             -webkit-box-shadow: none !important;
             -moz-box-shadow: none !important;
             box-shadow: none !important;
+            -webkit-user-select: text;
           }
         }
       }

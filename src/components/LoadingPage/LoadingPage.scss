@@ -7,7 +7,9 @@
   background-color: black;
   overflow: hidden;
   z-index: 1000;
+  opacity: 1;
   &.hide {
+      transition: all 0.5s;
       opacity: 0;
       pointer-events: none;
   }
