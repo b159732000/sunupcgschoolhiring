@@ -62,8 +62,8 @@ service.interceptors.response.use(
         Cookie.remove('p2_token')
         Cookie.remove('p2_clientInfo')
         Cookie.remove('p2_user_type')
-        if (window.enableWeXinLogIn) {
-          window.location.href = 'http://hvr.isunupcg.com/RunXiShan'
+        if (window.enableWeiXinLogIn) {
+          window.location.href = 'http://hvr.isunupcg.com/sunupcgschoolhiring'
         }
         return Promise.reject(res)
       }

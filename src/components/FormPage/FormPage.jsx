@@ -43,7 +43,7 @@ const FormPage = () => {
             console.log('全部資料已輸入')
 
             // 上傳資料到伺服器
-            // if (window.enableWeXinLogIn) {
+            // if (window.enableWeiXinLogIn) {
                 console.log('開始上傳使用者填的資料到伺服器');
                 axios('http://hvr.isunupcg.com/sunupcgschoolhiringserver/save.php', {
                     params: {

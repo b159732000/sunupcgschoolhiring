@@ -98,7 +98,7 @@ function App(props) {
     // }, 500)
 
     // 微信分享文字和縮圖
-    if (window.enableWeXinLogIn) {
+    if (window.enableWeiXinLogIn) {
       weiXinShareTextAndPicture();
     }
   }, [])
@@ -152,7 +152,7 @@ function App(props) {
   // 用微信ID項資料庫取得數據
   const connectAndGetDataFromDataBase = () => {
     console.log('開始用微信openID向資料庫取得用戶的其他資訊');
-    // if (window.enableWeXinLogIn) {
+    // if (window.enableWeiXinLogIn) {
     console.log(storeUsrOpenID);
     // 驗證openID是否在資料庫中
     axios('http://hvr.isunupcg.com/sunupcgschoolhiringserver/thisPersonIsInDataBase.php', {
@@ -201,6 +201,7 @@ function App(props) {
   // 微信分享文字和縮圖
   const weiXinShareTextAndPicture = () => {
     GetSignP2({ url: window.location.href }).then(res => {
+      console.log(res);
       wx.config({
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: res.msg.appId, // 必填，公众号的唯一标识
