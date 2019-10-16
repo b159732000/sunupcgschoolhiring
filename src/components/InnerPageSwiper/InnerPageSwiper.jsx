@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
 import './InnerPageSwiper.scss';
 
 const InnerPageSwiper = () => {
+    // Store
+    const storeThisPersonIdIsInDataBase = useSelector(state => state.myFirstReducers.thisPersonIdIsInDataBase);
+
     useEffect(() => {
     }, [])
 
@@ -44,7 +48,13 @@ const InnerPageSwiper = () => {
         wrapperClass: 'swiperWrapper',
         on: {
             // 'slideChange': () => { handleSlideChange() }
-        }
+        },
+        parallax: true,
+        parallaxEl: {
+            el: '.parallax-bg',
+            value: '-23%'
+        },
+        speed: 400
     }
     // 在DOM中添加好幾頁swiper(透過for迴圈)
     let renderImages = () => {
@@ -62,6 +72,7 @@ const InnerPageSwiper = () => {
         return (items);
     }
 
+    let parallax = -1800;
     return (
         <div className="InnerPageSwiper">
             {/* swiper */}
@@ -78,20 +89,20 @@ const InnerPageSwiper = () => {
                         {/* 本頁內容 */}
                         <div className="thisPageInnerContainer">
                             <div className="innerContent">
-                                <img src={require('../../images/InnerPageSwiper/1/InnerContent.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/1/InnerContent.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                         </div>
                     </div>
                     {/* 每2頁 */}
                     <div>
                         {/* 背景 */}
-                        <div className="bg left">
+                        <div className="bg left" >
                             <img className='bgImg' src={require('../../images/InnerPageSwiper/InnerSwiperBg.jpg')} alt="" />
                         </div>
                         {/* 本頁內容 */}
                         <div className="thisPageInnerContainer">
                             <div className="innerContent">
-                                <img src={require('../../images/InnerPageSwiper/2/InnerContent.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/2/InnerContent.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                         </div>
                     </div>
@@ -105,7 +116,7 @@ const InnerPageSwiper = () => {
                         <div className="thisPageInnerContainer">
                             {/* 本頁內容 */}
                             <div className="innerContent">
-                                <img src={require('../../images/InnerPageSwiper/3/InnerContent.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/3/InnerContent.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                         </div>
                     </div>
@@ -119,7 +130,7 @@ const InnerPageSwiper = () => {
                         <div className="thisPageInnerContainer">
                             {/* 本頁內容 */}
                             <div className="innerContent">
-                                <img src={require('../../images/InnerPageSwiper/4/InnerContent.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/4/InnerContent.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                         </div>
                     </div>
@@ -133,12 +144,12 @@ const InnerPageSwiper = () => {
                         <div className="thisPageInnerContainer">
                             {/* 本頁內容 */}
                             <div className="innerContent">
-                                <img src={require('../../images/InnerPageSwiper/5/InnerContent.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/5/InnerContent.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                         </div>
                     </div>
                     {/* 每6頁 */}
-                    <div>
+                    <div className='sixthPage'>
                         {/* 背景 */}
                         <div className="bg left">
                             <img className='bgImg' src={require('../../images/InnerPageSwiper/InnerSwiperBg.jpg')} alt="" />
@@ -147,8 +158,12 @@ const InnerPageSwiper = () => {
                         <div className="thisPageInnerContainer">
                             {/* 本頁內容 */}
                             <div className="innerContent">
-                                <img src={require('../../images/InnerPageSwiper/6/InnerContent.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/6/InnerContent.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
+                        </div>
+                        {/* 右下 */}
+                        <div className="rightBottom">
+                            <img src={require('../../images/InnerPageSwiper/6/More.png')} alt=""/>
                         </div>
                     </div>
                     {/* 每7頁(封底) */}
@@ -161,25 +176,31 @@ const InnerPageSwiper = () => {
                         <div className="lastPageInnerContainer">
                             {/* Join us 標題 */}
                             <div className="titlePositioner">
-                                <img src={require('../../images/InnerPageSwiper/7/TitleText.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/7/TitleText.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                             {/* 按鈕 */}
-                            <Link className="buttonPositioner" to="/sunupcgschoolhiring/FormPage">
-                                <div className="buttonContainer">
-                                    <div className="button">
-                                        <img src={require('../../images/InnerPageSwiper/7/ButtonIcon.png')} alt=""/>
-                                    </div>
-                                    <div className="text">
-                                        <img src={require('../../images/InnerPageSwiper/7/ClickToJoinText.png')} alt=""/>
-                                    </div>
+                            {(storeThisPersonIdIsInDataBase) ? (
+                                <div className="submitSuccessful">
+                                    <img src={require('../../images/InnerPageSwiper/SubmitPage/SubmitSuccessful.png')} alt="" data-swiper-parallax={parallax} />
                                 </div>
-                            </Link>
+                            ) : (
+                                    <Link className="buttonPositioner" to="/sunupcgschoolhiring/FormPage">
+                                        <div className="buttonContainer">
+                                            <div className="button">
+                                                <img src={require('../../images/InnerPageSwiper/7/ButtonIcon.png')} alt="" data-swiper-parallax={parallax} />
+                                            </div>
+                                            <div className="text">
+                                                <img src={require('../../images/InnerPageSwiper/7/ClickToJoinText.png')} alt="" data-swiper-parallax={parallax} />
+                                            </div>
+                                        </div>
+                                    </Link>)}
                             {/* 驕陽Logo */}
                             <div className="logoPositioner">
-                                <img src={require('../../images/InnerPageSwiper/1/TitleImg.png')} alt="" />
+                                <img src={require('../../images/InnerPageSwiper/1/TitleImg.png')} alt="" data-swiper-parallax={parallax} />
                             </div>
                         </div>
                     </div>
+
                 </Swiper>
             </div>
         </div>

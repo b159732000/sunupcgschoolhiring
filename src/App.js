@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import wx from 'weixin-js-sdk';
@@ -27,6 +27,8 @@ let weXinJumpCode;
 let weXinOpenID;
 
 function App(props) {
+  // Ref
+  const audioDOM = useRef();
   // Store
   const storeUsrOpenID = useSelector(state => state.myFirstReducers.usrOpenID);
   const storeFromServerUsrPlanetRadius = useSelector(state => state.myFirstReducers.fromServerUsrPlanetRadius);
@@ -50,6 +52,8 @@ function App(props) {
   const storeUpdateFromServerUsrWorkDays = (value) => dispatch(updateFromServerUsrWorkDays(value));
   const storeUpdateLotteryNumber = (value) => dispatch(updateLotteryNumber(value));
   const storeUpdateThisPersonIsInDataBase = (value) => dispatch(updateThisPersonIsInDataBase(value));
+  // State
+  const [musicIsOpen, setMusicIsOpen] = useState(true);
 
   // 如果有微信openID，就向伺服器要使用者設定的星球資訊、使用者在職日數、姓名，並放入store中
   useEffect(() => {
@@ -65,16 +69,19 @@ function App(props) {
     }
   }, [storeUsrOpenID])
 
-  // 如果此人在資料庫中，則跳轉到FormPage，並由FormPage的邏輯直接顯示結束畫面
-  useEffect(()=>{
-    if(storeThisPersonIdIsInDataBase) {
-      props.history.push('/sunupcgschoolhiring/FormPage');
+  // 如果此人在資料庫中，則跳轉到FormPage，並由FormPage的邏輯直接顯示結束畫面 (暫時停用此功能))
+  useEffect(() => {
+    if (storeThisPersonIdIsInDataBase) {
+      // props.history.push('/sunupcgschoolhiring/FormPage');
     }
   }, [storeThisPersonIdIsInDataBase])
 
   useEffect(() => {
+    // 为了自动播放音乐
+    window.addEventListener('touchstart', forceSafariPlayAudio, false);
+
     // 取得微信openID放到store
-    if (window.enableWeXinLogIn) {
+    if (window.enableWeiXinLogIn) {
       // 重新導向獲得微信授權(Code)，有Code後在把Code傳給後端取得微信ID放到store
       getWeXinOpenIDFromWexin();
     } else {
@@ -102,6 +109,19 @@ function App(props) {
       weiXinShareTextAndPicture();
     }
   }, [])
+
+  // 为了自动播放音乐
+  const forceSafariPlayAudio = () => {
+    console.log('觸發一次listener')
+    if (musicIsOpen) {
+      // setMusicIsOpen(true);
+      if (audioDOM.current) {
+        audioDOM.current.play();
+        window.removeEventListener('touchstart', forceSafariPlayAudio, false);//打开默认事件
+        console.log('移除listener')
+      }
+    }
+  }
 
   // 取得微信ID，並放入Store中
   const getWeXinOpenIDFromWexin = () => {
@@ -223,11 +243,11 @@ function App(props) {
           }
         });
         wx.onMenuShareTimeline({ ////朋友圈
-          title: "2019深圳骄阳校园招聘", // 分享标题
-          desc: "了解深圳骄阳创意科技2019最新职缺，即时投递履历。", // 分享描述
+          title: "2020深圳骄阳校园招聘", // 分享标题
+          desc: "了解深圳骄阳创意科技2020最新职缺，即时投递履历。", // 分享描述
           link: 'http://hvr.isunupcg.com/sunupcgschoolhiring/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           // imgUrl: res.msg.imgUrl, // 分享图标
-          imgUrl: 'https://sunupcgschoolhiring.oss-cn-shenzhen.aliyuncs.com/TitleImg.png', // 分享图标
+          imgUrl: 'https://sunupcgschoolhiring.oss-cn-shenzhen.aliyuncs.com/TitleImg1by1.jpg', // 分享图标
           success: function (res) {
             console.log(res);
             // 用户确认分享后执行的回调函数
@@ -241,11 +261,11 @@ function App(props) {
           }
         });
         wx.onMenuShareAppMessage({ //朋友
-          title: "2019深圳骄阳校园招聘", // 分享标题
-          desc: "了解深圳骄阳创意科技2019最新职缺，即时投递履历。", // 分享描述
+          title: "2020深圳骄阳校园招聘", // 分享标题
+          desc: "了解深圳骄阳创意科技2020最新职缺，即时投递履历。", // 分享描述
           link: 'http://hvr.isunupcg.com/sunupcgschoolhiring/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           // imgUrl: res.msg.imgUrl, // 分享图标
-          imgUrl: 'https://sunupcgschoolhiring.oss-cn-shenzhen.aliyuncs.com/TitleImg.png', // 分享图标
+          imgUrl: 'https://sunupcgschoolhiring.oss-cn-shenzhen.aliyuncs.com/TitleImg1by1.jpg', // 分享图标
           type: "", // 分享类型,music、video或link，不填默认为link
           dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
           success: function () {
@@ -265,7 +285,9 @@ function App(props) {
   return (
     <div className="App">
 
-      <LoadingPage></LoadingPage>
+      <audio src={require('./images/Breakin_Point.mp3')} ref={audioDOM} autoPlay loop></audio>
+
+      {(window.loadingPageIsOn) ? (<LoadingPage></LoadingPage>) : (null)}
 
       <Route render={(location) => (
         <Switch>

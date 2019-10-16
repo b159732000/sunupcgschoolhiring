@@ -66,11 +66,24 @@
               }
             }
           }
+          // 第六頁
+          &.sixthPage {
+            .rightBottom {
+              position: absolute;
+              bottom: 7%;
+              right: 0%;
+              height: 2rem;
+              img {
+                height: 100%;
+              }
+            }
+          }
           // 封底
           &.lastPage {
             height: 100%;
             img {
               height: 100%;
+              width: auto;
             }
             .lastPageInnerContainer {
               position: absolute;
@@ -89,6 +102,20 @@
                 align-items: center;
                 justify-content: center;
               }
+              .submitSuccessful {
+                position: absolute;
+                width: 100%;
+                height: 15%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                  height: 100%;
+                }
+              }
               .buttonPositioner {
                 position: absolute;
                 top: 50%;
@@ -100,30 +127,34 @@
                 align-items: center;
                 justify-content: center;
                 .buttonContainer {
-                    height: 100%;
-                    animation: joinButtonAnimation 1s infinite alternate;
-                    @keyframes joinButtonAnimation {
-                        0% {
-                            transform: scale(1);
-                        }
-                        100% {
-                            transform: scale(1.2);
-                        }
+                  height: 100%;
+                  width: 100%;
+                  animation: joinButtonAnimation 1s infinite alternate;
+                  @keyframes joinButtonAnimation {
+                    0% {
+                      transform: scale(1);
                     }
-                    .button {
-                        width: 100%;
-                        height: 70%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
+                    100% {
+                      transform: scale(1.2);
                     }
-                    .text {
-                        width: 100%;
-                        height: 10%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
+                  }
+                  .button {
+                    height: 70%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                      width: 99px;
+                      height: 113px;
                     }
+                  }
+                  .text {
+                    width: 100%;
+                    height: 10%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
                 }
               }
               .logoPositioner {

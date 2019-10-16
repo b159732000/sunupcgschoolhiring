@@ -40,7 +40,7 @@ const LoadingPage = () => {
                 <img src={require('../../images/InnerPageSwiper/7/Bg.jpg')} alt="" />
             </div>
             <div className="hireLogo">
-                <img src={require('../../images/LoadingPage/HireLogo.png')} alt="" />
+                <img mode='aspectFill' src={require('../../images/LoadingPage/HireLogo.png')} alt="" />
             </div>
             <div className="bottomPositioner">
                 <div className="upper">

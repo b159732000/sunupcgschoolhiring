@@ -51,15 +51,41 @@
     #root {
       height: 100%;
       width: 100%;
-      position: fixed;
-      overflow: hidden;
+      /* position: fixed; */
+      position: absolute;
+      background-color: #1E1311;
+      /* overflow: hidden; */
     }
   </style>
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>2019深圳骄阳校园招聘</title>
+  <title>2020深圳骄阳校园招聘</title>
 </head>
 
 <body>
+
+  <!-- 修復android鍵盤 Android Viewport height fix-->
+  <!-- <script type="text/javascript">
+    var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+    if (isAndroid) {
+      document.write('<meta name="viewport" content="width=device-width,height=' + window.innerHeight + ', initial-scale=1.0">');
+    }
+  </script> -->
+
+  <!-- 修復android鍵盤彈出，導致viewport resize的問題 -->
+  <!-- <script>
+    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+    function fixWindowResizeVh() {
+      console.log('修復android鍵盤彈出，導致viewport resize的問題');
+      console.log(h);
+      // document.getElementsByTagName
+      document.querySelectorAll('html')[0].style.height = h + 'px';
+      document.querySelectorAll('body')[0].style.height = h + 'px';
+    };
+    fixWindowResizeVh();
+    window.onresize = ()=>fixWindowResizeVh();
+  </script> -->
 
   <!-- 專案其他設定 -->
   <script>

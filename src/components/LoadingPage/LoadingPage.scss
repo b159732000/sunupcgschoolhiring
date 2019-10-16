@@ -35,6 +35,8 @@
     justify-content: center;
     img {
       height: 100%;
+      max-width: 60%;
+      width: auto;
     }
   }
   .bottomPositioner {
@@ -44,6 +46,8 @@
     width: 100%;
     img {
       height: 100%;
+      max-width: 70%;
+      width: auto;
     }
     .upper {
       height: 70%;
@@ -51,6 +55,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      img {
+        max-width: 50%;
+        width: 117px;
+        height: 73px;
+      }
     }
     .bottom {
       height: 25%;
